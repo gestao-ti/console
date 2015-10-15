@@ -21,7 +21,7 @@ function gestao_path()
 
 $app = new Symfony\Component\Console\Application('Gestao TI Console', '0.0.1');
 
-$app->add(new GestaoTi\Console\VmCommand);
+$app->add(new GestaoTI\Console\VmCommand);
 
 
 $app->run();
