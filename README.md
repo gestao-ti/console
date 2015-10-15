@@ -12,4 +12,4 @@ First, download the console using [composer](https://getcomposer.org/doc/00-intr
 
 ```composer global require gestao-ti/console```
 
->>Note: Make sure to place the ```~/.composer/vendor/bin``` directory in your PATH so the ```gestao``` executable can be located by your system.
+>Note: Make sure to place the ```~/.composer/vendor/bin``` directory in your PATH so the ```gestao``` executable can be located by your system.
