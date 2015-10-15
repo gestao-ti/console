@@ -36,7 +36,7 @@ class VmInitCommand extends Command
         $command = 'vagrant init gestao-ti/'.$machine;
         $path_machine = gestao_path().DIRECTORY_SEPARATOR.$machine;
 
-        @mkdir($path_machine);
+        exec("mkdir -p {$path_machine}");
         $process = new Process($command, $path_machine, array_merge($_SERVER, $_ENV), null, null);
         $process->run(function ($type, $line) use ($output, $machine,$path_machine) {
             $output->write($line);
