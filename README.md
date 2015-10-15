@@ -34,3 +34,4 @@ Once installed, the simple ```gestao vm``` command will manage virtual machine i
 * ```gestao vm:destroy <machine> # Destroy the virtual machine```
 * ```gestao vm:status <machine> # Get the status of the virtual machine```
 * ```gestao vm:update <machine> # Update the virtual machine```
+* ```gestao vm:provision <machine> # Re-provisions the virtual machine```
