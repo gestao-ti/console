@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+$_ENV['HOME'] = getenv('HOME');
+$_ENV['VAGRANT_DOTFILE_PATH'] = gestao_path().DIRECTORY_SEPARATOR;
+
+if (file_exists(__DIR__.'/vendor/autoload.php')) {
+    require __DIR__.'/vendor/autoload.php';
+} else {
+    require __DIR__.'/../../autoload.php';
+}
+
+function gestao_path()
+{
+    if (isset($_SERVER['HOME'])) {
+        return $_SERVER['HOME'].'/.gestao';
+    } else {
+        return $_SERVER['HOMEDRIVE'].$_SERVER['HOMEPATH'].DIRECTORY_SEPARATOR.'.gestao';
+    }
+}
+
+$app = new Symfony\Component\Console\Application('Gestao TI Console', '0.0.1');
+
+$app->add(new GestaoTi\Console\VmCommand);
+
+
+$app->run();
