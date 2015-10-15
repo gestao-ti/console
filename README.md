@@ -13,3 +13,11 @@ First, download the console using [composer](https://getcomposer.org/doc/00-intr
 ```composer global require gestao-ti/console```
 
 >Note: Make sure to place the ```~/.composer/vendor/bin``` directory in your PATH so the ```gestao``` executable can be located by your system.
+
+#Command
+
+Once installed, the simple ```gestao vm``` command will manage virtual machine in the directory ```~/.gestao```. For instance, ```gestao vm:up machine```  will run a virtual machine named machine. This method of manage is much faster to run virtual machine the gestao-ti.
+
+* vm:init <machine> 
+* vm:up <machine>
+* vm:destroy <machine>
