@@ -19,7 +19,7 @@ class VmHaltCommand extends Command
     {
         $this
             ->setName('vm:halt')
-            ->setDescription('Shutdown virtual machine')
+            ->setDescription('Turning off virutal machine')
             ->addArgument('machine', InputArgument::REQUIRED, 'Virtual machine.');
     }
 
