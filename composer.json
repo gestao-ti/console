@@ -1,0 +1,25 @@
+{
+    "name": "gestao-ti/console",
+    "description": "Gestao TI console.",
+    "keywords": ["gestao-ti", "console"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Antério Vieira",
+            "email": "anteriovieira@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "GestaoTI\\Console\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "~4.0|~5.0",
+        "symfony/console": "~2.3",
+        "symfony/process": "~2.3"
+    },
+    "bin": [
+        "gestao"
+    ]
+}
