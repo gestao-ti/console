@@ -26,4 +26,6 @@ $app->add(new GestaoTI\Console\VmInitCommand);
 $app->add(new GestaoTI\Console\VmUpCommand);
 $app->add(new GestaoTI\Console\VmDestroyCommand);
 $app->add(new GestaoTI\Console\VmUpdateCommand);
+$app->add(new GestaoTI\Console\VmHaltCommand);
+$app->add(new GestaoTI\Console\VmProvisionCommand);
 $app->run();
