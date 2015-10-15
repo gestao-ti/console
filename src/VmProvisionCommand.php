@@ -34,7 +34,7 @@ class VmProvisionCommand extends Command
     {
         $machine = $input->getArgument('machine');
         $command = 'vagrant provision';
-        $path_machine = gestao_path().DIRECTORY_SEPARATOR.$machine;
+        $path_machine = gestao_path_vms().DIRECTORY_SEPARATOR.$machine;
 
         $process = new Process($command, $path_machine, array_merge($_SERVER, $_ENV), null, null);
         $process->run(function ($type, $line) use ($output, $machine,$path_machine) {

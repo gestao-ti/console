@@ -34,7 +34,7 @@ class VmUpCommand extends Command
     {
         $machine = $input->getArgument('machine');
         $command = 'vagrant up';
-        $path_machine = gestao_path().DIRECTORY_SEPARATOR.$machine;
+        $path_machine = gestao_path_vms().DIRECTORY_SEPARATOR.$machine;
 
         if (!is_dir($path_machine)) {
             (new VmInitCommand())->execute($input, $output);

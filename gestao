@@ -19,6 +19,11 @@ function gestao_path()
     }
 }
 
+function gestao_path_vms()
+{
+    return gestao_path().DIRECTORY_SEPARATOR.'machines';
+}
+
 $app = new Symfony\Component\Console\Application('Gestao TI Console', '0.0.1');
 
 $app->add(new GestaoTI\Console\InitCommand);
