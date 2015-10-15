@@ -1,4 +1,7 @@
-#Installation
+
+[![Latest Stable Version](https://poser.pugx.org/gestao-ti/console/version)](https://packagist.org/packages/gestao-ti/console)
+[![Total Downloads](https://poser.pugx.org/gestao-ti/console/downloads)](https://packagist.org/packages/gestao-ti/console)
+[![Latest Unstable Version](https://poser.pugx.org/gestao-ti/console/v/unstable)](//packagist.org/packages/gestao-ti/console)
 
 ####Requirements
 
@@ -22,6 +25,9 @@ export PATH="$PATH:~/.composer/vendor/bin"
 
 Once installed, the simple ```gestao vm``` command will manage virtual machine in the directory ```~/.gestao```. For instance, ```gestao vm:up machine```  will run a virtual machine named machine. This method of manage is much faster to run virtual machine the gestao-ti.
 
-* vm:init <machine> 
-* vm:up <machine>
-* vm:destroy <machine>
+* ```gestao vm:init <machine> # Init virtual machine``` 
+* ```gestao vm:up <machine> # Start virtual machine```
+* ```gestao vm:halt <machine> # Turning off virutal machine```
+* ```gestao vm:destroy <machine> # Destroy the virtual machine```
+* ```gestao vm:status <machine> # Get the status of the virtual machine```
+* ```gestao vm:update <machine> # Update the virtual machine```
