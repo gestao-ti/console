@@ -24,9 +24,10 @@ function gestao_path_vms()
     return gestao_path().DIRECTORY_SEPARATOR.'machines';
 }
 
-$app = new Symfony\Component\Console\Application('Gestao TI Console', '0.0.11');
+$app = new Symfony\Component\Console\Application('Gestao TI Console', '0.0.12');
 
 $app->add(new GestaoTI\Console\InitCommand);
+$app->add(new GestaoTI\Console\SelfUpdateCommand);
 $app->add(new GestaoTI\Console\VmInitCommand);
 $app->add(new GestaoTI\Console\VmUpCommand);
 $app->add(new GestaoTI\Console\VmDestroyCommand);
@@ -35,5 +36,6 @@ $app->add(new GestaoTI\Console\VmHaltCommand);
 $app->add(new GestaoTI\Console\VmProvisionCommand);
 $app->add(new GestaoTI\Console\VmStatusCommand);
 $app->add(new GestaoTI\Console\VmEditCommand);
-$app->add(new GestaoTI\Console\SelfUpdateCommand);
+$app->add(new GestaoTI\Console\VmReloadCommand);
+
 $app->run();
