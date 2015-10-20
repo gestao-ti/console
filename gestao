@@ -35,4 +35,5 @@ $app->add(new GestaoTI\Console\VmHaltCommand);
 $app->add(new GestaoTI\Console\VmProvisionCommand);
 $app->add(new GestaoTI\Console\VmStatusCommand);
 $app->add(new GestaoTI\Console\VmEditCommand);
+$app->add(new GestaoTI\Console\SelfUpdateCommand);
 $app->run();
