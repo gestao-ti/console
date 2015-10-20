@@ -42,7 +42,6 @@ class SelfUpdateCommand extends Command
         $process = new Process(implode(' && ', $commands));
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
-            $output->writeln('<info>Gestao console is already up to date.</info>');
         });
 
     }
