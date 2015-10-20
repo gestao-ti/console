@@ -37,7 +37,7 @@ class VmInitCommand extends Command
         $path_machine = gestao_path_vms().DIRECTORY_SEPARATOR.$machine;
 
         exec("mkdir -p {$path_machine}");
-        $process = new Process($command, $path_machine, array_merge($_SERVER, $_ENV), null, null);
+        $process = new Process($command, $path_machine);
         $process->run(function ($type, $line) use ($output, $machine,$path_machine) {
             $output->write($line);
             $output->writeln('<comment>==> Gestao: Machine '.$machine.' initialized in:</comment> '.$path_machine);

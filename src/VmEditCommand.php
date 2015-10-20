@@ -40,9 +40,9 @@ class VmEditCommand extends Command
             (new VmInitCommand())->execute($input, $output);
         }
 
-        $command = $this->executable().' '.$path_machine.'/'.$file;
+        $command = $this->executable($path_machine.DIRECTORY_SEPARATOR.$file);
 
-        $process = new Process($command, $path_machine, array_merge($_SERVER, $_ENV), null, null);
+        $process = new Process($command, $path_machine);
 
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
@@ -54,14 +54,14 @@ class VmEditCommand extends Command
      *
      * @return string
      */
-    protected function executable()
+    protected function executable($file)
     {
         if (strpos(strtoupper(PHP_OS), 'WIN') === 0) {
-            return 'start';
+            return 'start ' . $file;
         } elseif (strpos(strtoupper(PHP_OS), 'DARWIN') === 0) {
-            return 'open';
+            return 'open ' . $file;
         }
 
-        return 'xdg-open';
+        return 'xdg-open ' . $file . ' >/dev/null';
     }
 }
