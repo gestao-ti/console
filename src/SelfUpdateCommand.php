@@ -43,6 +43,7 @@ class SelfUpdateCommand extends Command
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
         });
-
+        
+        $output->writeln('<info>Gestao Console is up to date.</info>');
     }
 }
