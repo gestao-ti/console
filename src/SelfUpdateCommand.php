@@ -39,7 +39,7 @@ class SelfUpdateCommand extends Command
             'composer global require gestao-ti/console'
         ];
 
-        $process = new Process(implode(' && ', $commands));
+        $process = new Process(implode(' && ', $commands), null, null, null, null);
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
         });
