@@ -24,7 +24,11 @@ function gestao_path_vms()
     return gestao_path().DIRECTORY_SEPARATOR.'machines';
 }
 
-$app = new Symfony\Component\Console\Application('Gestao TI Console', '0.0.15');
+function manifest(){
+    return json_decode(@file_get_contents(__DIR__."/manifest.json"));
+}
+
+$app = new Symfony\Component\Console\Application('Gestao TI Console', manifest()->version);
 
 $app->add(new GestaoTI\Console\InitCommand);
 $app->add(new GestaoTI\Console\SelfUpdateCommand);
