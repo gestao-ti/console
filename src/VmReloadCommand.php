@@ -37,7 +37,7 @@ class VmReloadCommand extends Command
         $path_machine = gestao_path_vms().DIRECTORY_SEPARATOR.$machine;
 
         $process = new Process($command, $path_machine);
-        $process->run(function ($type, $line) use ($output, $machine,$path_machine) {
+        $process->run(function ($type, $line) use ($output, $machine,$path_machine, null, null, null) {
             $output->write($line);
         });
     }
