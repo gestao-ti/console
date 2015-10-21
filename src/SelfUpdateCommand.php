@@ -10,6 +10,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SelfUpdateCommand extends Command
 {
+        /**
+     * @var OutputInterface
+     */
+    private $output;
+
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        $this->output = $output;
+    }
+
     /**
      * Configure the command options.
      *
@@ -39,11 +49,32 @@ class SelfUpdateCommand extends Command
             'composer global require gestao-ti/console'
         ];
 
-        $process = new Process(implode(' && ', $commands), null, null, null, null);
-        $process->run(function ($type, $line) use ($output) {
-            $output->write($line);
-        });
-        
-        $output->writeln('<info>Gestao Console is up to date.</info>');
+        if(!$this->installerIsUpdated()){
+            $process = new Process(implode(' && ', $commands), null, null, null, null);
+            $process->run(function ($type, $line) use ($output) {
+                $output->write($line);
+            });
+        }
+    }
+
+    public function installerIsUpdated()
+    {
+        $isUpdated = false;
+        $localVersion = $this->getApplication()->getVersion();
+
+        if (false === $remoteManifest = @file_get_contents('https://raw.githubusercontent.com/gestao-ti/console/master/manifest.json')) {
+            throw new \RuntimeException('The new version of the Gestao Console couldn\'t be downloaded from the server.');
+        }
+
+        $manifest = json_decode($remoteManifest);
+        $remoteVersion = $manifest->version;
+        if ($localVersion === $remoteVersion) {
+            $this->output->writeln('<info>Gestao Console is already up to date.</info>');
+            $isUpdated = true;
+        } else {
+            $this->output->writeln(sprintf('<info>Updating</info> Gestao Console to <comment>%s</comment> version', $remoteVersion));
+        }
+
+        return $isUpdated;
     }
 }
