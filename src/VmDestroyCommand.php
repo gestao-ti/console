@@ -37,7 +37,7 @@ class VmDestroyCommand extends Command
         $path_machine = gestao_path_vms().DIRECTORY_SEPARATOR.$machine;
 
         $process = new Process($command, $path_machine);
-        $process->run(function ($type, $line) use ($output, $machine, $path_machine) {
+        $process->run(function ($type, $line) use ($output, $machine, $path_machine, null, null, null) {
             $output->write($line);
             $output->writeln('<comment>==> Gestao: Machine '.$machine.' destroyed</comment>');
             exec("rm -rf {$path_machine}");
