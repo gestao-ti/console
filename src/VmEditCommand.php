@@ -42,7 +42,7 @@ class VmEditCommand extends Command
 
         $command = $this->executable($path_machine.DIRECTORY_SEPARATOR.$file);
 
-        $process = new Process($command, $path_machine);
+        $process = new Process($command, $path_machine, null, null, null);
 
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
