@@ -41,7 +41,7 @@ class VmStatusCommand extends Command
 //        echo "\n";
 //        die;
 
-        $process = new Process($command, $path_machine);
+        $process = new Process($command, $path_machine, null, null, null);
         $process->run(function ($type, $line) use ($output, $machine,$path_machine) {
             $output->write($line);
         });
