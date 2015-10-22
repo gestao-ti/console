@@ -19,9 +19,6 @@
         "symfony/console": "~2.3",
         "symfony/process": "~2.3"
     },
-    "config": {
-        "bin-dir": "~/bin"
-    },
     "bin": [
         "gestao"
     ]
