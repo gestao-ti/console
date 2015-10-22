@@ -32,7 +32,7 @@ class SelfUpdateCommand extends Command
             ->setAliases(array('selfupdate'))
             ->setDescription('Update the console to the latest version.')
             ->setHelp('The <info>%command.name%</info> command updates the console to the latest available version.')
-        ;
+            ->addOption('force', 'f', InputOption::VALUE_NONE, 'Force update.');
     }
 
     /**
@@ -49,7 +49,7 @@ class SelfUpdateCommand extends Command
             'composer global require gestao-ti/console'
         ];
 
-        if(!$this->installerIsUpdated()){
+        if(!$this->installerIsUpdated() || $input->getOption('force')){
             $process = new Process(implode(' && ', $commands), null, null, null, null);
             $process->run(function ($type, $line) use ($output) {
                 $output->write($line);
