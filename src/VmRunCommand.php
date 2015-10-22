@@ -33,22 +33,8 @@ class VmRunCommand extends Command
         $machine = $input->getArgument('machine');
         $path_machine = gestao_path_vms().DIRECTORY_SEPARATOR.$machine;
         
-        chdir($path_machine);
         $command = $input->getArgument('ssh-command');
-        passthru($this->setEnvironmentCommand().' vagrant ssh -c "'.$command.'"');
-    }
-    
-    protected function setEnvironmentCommand()
-    {
-        if ($this->isWindows()) {
-            return 'SET VAGRANT_DOTFILE_PATH='.$_ENV['VAGRANT_DOTFILE_PATH'].' &&';
-        }
-
-        return 'VAGRANT_DOTFILE_PATH="'.$_ENV['VAGRANT_DOTFILE_PATH'].'"';
-    }
-
-    protected function isWindows()
-    {
-        return strpos(strtoupper(PHP_OS), 'WIN') === 0;
+        chdir($path_machine);
+        passthru('vagrant ssh -c "'.$command.'"');
     }
 }
