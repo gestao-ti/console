@@ -20,7 +20,8 @@ class VmUpCommand extends Command
         $this
             ->setName('vm:up')
             ->setDescription('Start virtual machine')
-            ->addArgument('machine', InputArgument::REQUIRED, 'Run the virtual machine on the vagrant.');
+            ->addArgument('machine', InputArgument::REQUIRED, 'Run the virtual machine on the vagrant.')
+            ->addOption('provision', 'p', InputOption::VALUE_NONE, 'Run the provisioners on the box.');
     }
 
     /**
@@ -35,6 +36,10 @@ class VmUpCommand extends Command
         $machine = $input->getArgument('machine');
         $command = 'vagrant up';
         $path_machine = gestao_path_vms().DIRECTORY_SEPARATOR.$machine;
+        
+        if ($input->getOption('provision')) {
+            $command .= ' --provision';
+        }
 
         if (!is_dir($path_machine)) {
             (new VmInitCommand())->execute($input, $output);
