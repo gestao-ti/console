@@ -1,0 +1,29 @@
+require 'json'
+require 'yaml'
+
+VAGRANTFILE_API_VERSION = "2"
+confDir = $confDir ||= File.dirname(__FILE__)
+
+yamlFile = confDir + "/Gestao.yaml"
+jsonFile = confDir + "/Gestao.json"
+afterFile = confDir + "/after.sh"
+aliasesFile = confDir + "/aliases"
+
+require File.expand_path(File.dirname(__FILE__) + '/scripts/gestao.rb')
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+    if File.exists? yamlFile then
+        Gestao.configure(config, YAML::load(File.read(yamlFile)))
+    elsif File.exists? jsonFile then
+        Gestao.configure(config, JSON.parse(File.read(jsonFile)))
+    end
+
+    if File.exists? afterFile then
+        config.vm.provision "shell", path: afterFile
+    end
+
+    if File.exists? aliasesFile then
+        config.vm.provision "file", source: aliasesFile, destination: "~/.bash_aliases"
+    end
+end

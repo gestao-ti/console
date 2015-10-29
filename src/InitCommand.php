@@ -28,12 +28,13 @@ class InitCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        if (is_dir(gestao_path())) {
-            throw new InvalidArgumentException('Gestao has already been initialized.');
+        if (!is_dir(gestao_path().'/scripts')) {
+            mkdir(gestao_path().'/scripts');
+            copy(__DIR__.'/scripts/gestao.rb', gestao_path().'/scripts/gestao.rb');
+            copy(__DIR__.'/scripts/serve-apache2.sh', gestao_path().'/scripts/serve-apache2.sh');
+            $output->writeln('<comment>==> Gestao: Creating scripts files...</comment> <info>✔</info>');
+        } else {
+            $output->writeln('<comment>==> Gestao: Scripts files...</comment> <info>✔</info>');
         }
-
-        mkdir(gestao_path());
-
-        $output->writeln('<comment>Gestao initialized in:</comment> '.gestao_path());
     }
 }
