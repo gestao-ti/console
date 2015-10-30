@@ -49,11 +49,9 @@ class VmInitCommand extends Command
             throw new InvalidArgumentException($machine.' has already been initialized.');
         }
 
-        exec("mkdir -p {$path_machine}");
-//        $process = new Process($command, $path_machine, null, null, null);
-//        $process->run(function ($type, $line) use ($output, $machine,$path_machine) {
-//            $output->write($line);
-//        });
+        mkdir($path_machine, 0777, true);
+
+        (new InitCommand())->execute($input, $output);
 
         if (!file_exists($path_machine.'/Gestao.yaml')) {
             copy(__DIR__.'/stubs/Gestao.yaml', $path_machine.'/Gestao.yaml');
