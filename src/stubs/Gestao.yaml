@@ -10,12 +10,12 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: ~/Code
-      to: /home/vagrant/Code
+    - map: ~/
+      to: /home/vagrant/gestao
 
 sites:
     - map: gestao.app
-      to: /home/vagrant/Code/Laravel/public
+      to: /home/vagrant/gestao
       type: apache
 
 databases:
