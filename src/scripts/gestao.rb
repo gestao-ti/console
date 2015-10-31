@@ -4,24 +4,24 @@ class Gestao
         ENV['VAGRANT_DEFAULT_PROVIDER'] = settings["provider"] ||= "virtualbox"
 
         # Configure local variable to access scripts from remote location
-        #scriptDir = File.dirname(__FILE__) + '/../..'
+        scriptDir = File.dirname(__FILE__) + '/../..'
 
         # Prevent TTY Errors
-        #config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+        config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
         # Configure The Box
         config.vm.box = settings["name"] ||= "gestao-ti/ubuntu"
         config.vm.hostname = settings["hostname"] ||= "gestao-ti"
 
         # Configure A Private Network IP
-        #config.vm.network :private_network, ip: settings["ip"] ||= "192.168.10.10"
+        config.vm.network :private_network, ip: settings["ip"] ||= "192.168.10.10"
 
         # Configure Additional Networks
-        #if settings.has_key?("networks")
-        #  settings["networks"].each do |network|
-        #    config.vm.network network["type"], ip: network["ip"], bridge: network["bridge"] ||= nil
-        #  end
-        #end
+        if settings.has_key?("networks")
+          settings["networks"].each do |network|
+            config.vm.network network["type"], ip: network["ip"], bridge: network["bridge"] ||= nil
+          end
+        end
 
         # Configure A Few VirtualBox Settings
         #config.vm.provider "virtualbox" do |vb|
