@@ -24,7 +24,8 @@ function gestao_path_vms()
     return gestao_path().DIRECTORY_SEPARATOR.'machines';
 }
 
-function manifest(){
+function manifest()
+{
     return json_decode(@file_get_contents(__DIR__."/manifest.json"));
 }
 
