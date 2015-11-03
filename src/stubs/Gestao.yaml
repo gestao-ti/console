@@ -18,14 +18,11 @@ sites:
       to: /home/vagrant/gestao
       type: apache
 
-databases:
-    -
-
-variables:
-    - key: 'APP_ENV'
-      value: 'local'
-    - key: 'APP_DEBUG'
-      value: 'true'
+#variables:
+#    - key: 'APP_ENV'
+#      value: 'local'
+#    - key: 'APP_DEBUG'
+#      value: 'true'
 
 # ports:
 #     - send: 93000
