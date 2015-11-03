@@ -7,9 +7,9 @@
 
 The gestao-ti/console has a few system requirements.
 
-* [PHP](http://www.php.net/)        >= 5.5.9
-* [Vagrant](https://www.vagrantup.com/downloads.html)    >= 1.7.4
-* [Virtualbox](https://www.virtualbox.org/wiki/Downloads) >= 5.0.0
+* [PHP](http://www.php.net/).......... >= 5.5.9
+* [Vagrant](https://www.vagrantup.com/downloads.html).... >= 1.7.4
+* [Virtualbox](https://www.virtualbox.org/wiki/Downloads). >= 5.0.0
 
 First, download the console using [composer](https://getcomposer.org/doc/00-intro.md):
 
