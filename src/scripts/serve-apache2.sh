@@ -1,69 +1,36 @@
 #!/bin/bash
-### Set Language
-TEXTDOMAIN=virtualhost
 
 ### Set default parameters
 action=$1
-domain=$2
-rootDir=$3
+map=$2
+to=$3
 owner=$(who am i | awk '{print $1}')
 email='webmaster@localhost'
-sitesEnable='/etc/apache2/sites-enabled/'
-sitesAvailable='/etc/apache2/sites-available/'
-userDir='/var/www/'
-sitesAvailabledomain=$sitesAvailable$domain.conf
-
-### don't modify from here unless you know what you are doing ####
-
-if [ "$(whoami)" != 'root' ]; then
-	echo $"You have no permission to run $0 as non-root user. Use sudo"
-		exit 1;
-fi
-
-if [ "$action" != 'create' ] && [ "$action" != 'delete' ]
-	then
-		echo $"You need to prompt for action (create or delete) -- Lower-case only"
-		exit 1;
-fi
-
-while [ "$domain" == "" ]
-do
-	echo -e $"Please provide domain. e.g.dev,staging"
-	read domain
-done
-
-if [ "$rootDir" == "" ]; then
-	rootDir=${domain//./}
-fi
-
-### if root dir starts with '/', don't use /var/www as default starting point
-if [[ "$rootDir" =~ ^/ ]]; then
-	userDir=''
-fi
-
-rootDir=$userDir$rootDir
+pathSiteEnable='/etc/apache2/sites-enabled/'
+pathSiteAvailable='/etc/apache2/sites-available/'
+siteAvailableMap=$sitesAvailable$map.conf
 
 if [ "$action" == 'create' ]
 	then
 		### check if domain already exists
-		if [ -e $sitesAvailabledomain ]; then
-			echo -e $"This domain already exists.\nPlease Try Another one"
+		if [ -e $siteAvailableMap ]; then
+			echo -e $"Domain $map already exists."
 			exit;
 		fi
 
 		### check if directory exists or not
-		if ! [ -d $rootDir ]; then
+		if ! [ -d $to ]; then
 			### create the directory
-			mkdir $rootDir
+			mkdir -p $to
 			### give permission to root dir
-			chmod 755 $rootDir
+			chmod 755 $to
 			### write test file in the new domain dir
-			if ! echo "<?php echo phpinfo(); ?>" > $rootDir/phpinfo.php
+			if ! echo "<?php echo phpinfo(); ?>" > $to/phpinfo.php
 			then
-				echo $"ERROR: Not able to write in file $userDir/$rootDir/phpinfo.php. Please check permissions"
+				echo $"ERROR: Not able to write in file $to/index.php. Please check permissions"
 				exit;
 			else
-				echo $"Added content to $rootDir/phpinfo.php"
+				echo $"Added content to $to/index.php"
 			fi
 		fi
 
@@ -71,51 +38,44 @@ if [ "$action" == 'create' ]
 		if ! echo "
 		<VirtualHost *:80>
 			ServerAdmin $email
-			ServerName $domain
-			ServerAlias $domain
-			DocumentRoot $rootDir
+			ServerName $map
+			ServerAlias $map
+			DocumentRoot $to
 			<Directory />
 				AllowOverride All
 			</Directory>
-			<Directory $rootDir>
+			<Directory $to>
 				Options Indexes FollowSymLinks MultiViews
 				AllowOverride all
 				Require all granted
 			</Directory>
-			ErrorLog /var/log/apache2/$domain-error.log
+			ErrorLog /var/log/apache2/$map-error.log
 			LogLevel error
-			CustomLog /var/log/apache2/$domain-access.log combined
-		</VirtualHost>" > $sitesAvailabledomain
+			CustomLog /var/log/apache2/$map-access.log combined
+		</VirtualHost>" > $siteAvailableMap
 		then
-			echo -e $"There is an ERROR creating $domain file"
+			echo -e $"There is an ERROR creating $map file"
 			exit;
 		else
 			echo -e $"\nNew Virtual Host Created\n"
 		fi
 
-		### Add domain in /etc/hosts
-		if ! echo "127.0.0.1	$domain" >> /etc/hosts
-		then
-			echo $"ERROR: Not able to write in /etc/hosts"
-			exit;
-		else
-			echo -e $"Host added to /etc/hosts file \n"
-		fi
+
 
 		if [ "$owner" == "" ]; then
-			chown -R $(whoami):$(whoami) $rootDir
+			chown -R $(whoami):$(whoami) $to
 		else
-			chown -R $owner:$owner $rootDir
+			chown -R $owner:$owner $to
 		fi
 
 		### enable website
-		a2ensite $domain
+		a2ensite $map
 
 		### restart Apache
 		/etc/init.d/apache2 reload
 
 		### show the finished message
-		echo -e $"Complete! \nYou now have a new Virtual Host \nYour new host is: http://$domain \nAnd its located at $rootDir"
+		echo -e $"Complete! \nYou now have a new Virtual Host \nYour new host is: http://$map \nAnd its located at $to"
 		exit;
 	else
 		### check whether domain already exists
