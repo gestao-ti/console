@@ -87,25 +87,26 @@ class Gestao
         end
 
         # Configure all sites
-        settings["sites"].each do |site|
-         type = site["type"] ||= "gestao"
-         if (type == "apache")
-           type = "apache2"
-         end
+        if settings.include? 'sites'
+            settings["sites"].each do |site|
+                 type = site["type"] ||= "gestao"
+                 if (type == "apache")
+                   type = "apache2"
+                 end
 
-         config.vm.provision "shell" do |s|
-           s.path = scriptDir + "/serve-#{type}.sh"
-           s.args = [site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443"]
-         end
+                config.vm.provision "shell" do |s|
+                   s.path = scriptDir + "/serve-#{type}.sh"
+                   s.args = [site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443"]
+                end
 
-        # Configure The Cron Schedule
-         if (site.has_key?("schedule") && site["schedule"])
-           config.vm.provision "shell" do |s|
-             s.path = scriptDir + "/cron-schedule.sh"
-             s.args = [site["map"].tr('^A-Za-z0-9', ''), site["to"]]
-           end
-         end
-
+                # Configure The Cron Schedule
+                if (site.has_key?("schedule") && site["schedule"])
+                   config.vm.provision "shell" do |s|
+                     s.path = scriptDir + "/cron-schedule.sh"
+                     s.args = [site["map"].tr('^A-Za-z0-9', ''), site["to"]]
+                   end
+                end
+            end
         end
     end
 end
