@@ -21,7 +21,7 @@ fi
 ### check if directory exists or not
 if ! [ -d $to ]; then
 	### create the directory
-	sudo mkdir -p $to
+	sudo mkdir -p $to > /dev/null
 	### give permission to root dir
 	sudo chmod 755 $to
 
