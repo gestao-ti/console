@@ -32,7 +32,7 @@ class VmEditCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $file = 'Vagrantfile';
+        $file = 'Gestao.yaml';
         $machine = $input->getArgument('machine');
         $path_machine = gestao_path_vms().DIRECTORY_SEPARATOR.$machine;
 
