@@ -1,5 +1,5 @@
 ---
-ip: "192.168.10.10"
+ip: "i"
 memory: 2048
 cpus: 1
 provider: virtualbox
@@ -21,8 +21,6 @@ sites:
 #variables:
 #    - key: 'APP_ENV'
 #      value: 'local'
-#    - key: 'APP_DEBUG'
-#      value: 'true'
 
 # ports:
 #     - send: 93000
