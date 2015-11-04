@@ -4,9 +4,8 @@ map=$1
 to=$2
 port=$3
 
-pathSiteEnable="/etc/apache2/sites-enabled/"
 pathSiteAvailable="/etc/apache2/sites-available/"
-siteAvailableMap="$sitesAvailable$map.conf"
+siteAvailableMap="$pathSiteAvailable$map.conf"
 
 ### check if domain already exists
 if [ -e $siteAvailableMap ]; then
