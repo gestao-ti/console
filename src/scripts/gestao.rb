@@ -90,7 +90,7 @@ class Gestao
         if settings.include? 'sites'
 
             config.vm.provision "shell" do |s|
-                   s.path = scriptDir + "/serve-#{type}.sh"
+                   s.path = scriptDir + "/serve-apache2.sh"
                    s.args = ['-d']
             end
 
