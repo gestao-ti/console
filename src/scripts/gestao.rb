@@ -88,6 +88,12 @@ class Gestao
 
         # Configure all sites
         if settings.include? 'sites'
+
+            config.vm.provision "shell" do |s|
+                   s.path = scriptDir + "/serve-#{type}.sh"
+                   s.args = ['-d', site["map"]]
+            end
+
             settings["sites"].each do |site|
                  type = site["type"] ||= "gestao"
                  if (type == "apache")
@@ -96,7 +102,7 @@ class Gestao
 
                 config.vm.provision "shell" do |s|
                    s.path = scriptDir + "/serve-#{type}.sh"
-                   s.args = [site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443"]
+                   s.args = ['-c', site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443"]
                 end
 
                 # Configure The Cron Schedule
