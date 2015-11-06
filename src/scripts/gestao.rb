@@ -91,7 +91,7 @@ class Gestao
 
             config.vm.provision "shell" do |s|
                    s.path = scriptDir + "/serve-#{type}.sh"
-                   s.args = ['-d', site["map"]]
+                   s.args = ['-d']
             end
 
             settings["sites"].each do |site|
