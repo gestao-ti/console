@@ -19,7 +19,7 @@ class VmEditCommand extends Command
     {
         $this
             ->setName('vm:edit')
-            ->setDescription('Edit Vagrantfile of virtual machine')
+            ->setDescription('Edit settings of virtual machine')
             ->addArgument('machine', InputArgument::REQUIRED, 'Virtual machine on the vagrant.');
     }
 

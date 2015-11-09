@@ -3,13 +3,15 @@
 [![Total Downloads](https://poser.pugx.org/gestao-ti/console/downloads)](https://packagist.org/packages/gestao-ti/console)
 [![Latest Unstable Version](https://poser.pugx.org/gestao-ti/console/v/unstable)](//packagist.org/packages/gestao-ti/console)
 
-####Requirements
+#Requirements
 
 The gestao-ti/console has a few system requirements.
 
-* [PHP](http://www.php.net/).......... >= 5.5.9
-* [Vagrant](https://www.vagrantup.com/downloads.html).... >= 1.7.4
-* [Virtualbox](https://www.virtualbox.org/wiki/Downloads). >= 5.0.0
+| Required  | Version |
+| ------------- | ------------- |
+| [PHP](http://www.php.net/)  | >= 5.5.9  |
+| [Vagrant](https://www.vagrantup.com/downloads.html)  | >= 1.7.4  |
+| [Virtualbox](https://www.virtualbox.org/wiki/Downloads) | >= 5.0.0 |
 
 First, download the console using [composer](https://getcomposer.org/doc/00-intro.md):
 
@@ -17,7 +19,7 @@ First, download the console using [composer](https://getcomposer.org/doc/00-intr
 $ composer global require gestao-ti/console
 ```
 
->Note: Make sure to place the ```~/.composer/vendor/bin``` directory in your PATH so the ```gestao``` executable can be located by your system.
+Second, make sure to place the ```~/.composer/vendor/bin``` directory in your PATH so the ```gestao``` executable can be located by your system.
 
 ```bash
 # on your linux/MAC terminal:
@@ -36,3 +38,4 @@ Once installed, the simple ```gestao vm``` command will manage virtual machine i
 * ```gestao vm:update <machine> # Update the virtual machine```
 * ```gestao vm:provision <machine> # Re-provisions the virtual machine```
 * ```gestao vm:run <machine> <command> # Run commands through the virtual machine via SSH```
+* ```gestao vm:edit <machine> # Edit settings of virtual machine```
