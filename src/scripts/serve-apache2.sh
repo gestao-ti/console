@@ -83,7 +83,11 @@ case $opt in
     
 	;;
 	# Options invalid
-    *) echo "Invalid option";;
+    *)
+
+    	echo "Invalid option"
+
+    ;;
 esac
 exit;
 
