@@ -36,3 +36,4 @@ Once installed, the simple ```gestao vm``` command will manage virtual machine i
 * ```gestao vm:update <machine> # Update the virtual machine```
 * ```gestao vm:provision <machine> # Re-provisions the virtual machine```
 * ```gestao vm:run <machine> <command> # Run commands through the virtual machine via SSH```
+* ```gestao vm:edit <machine> # Edit settings of virtual machine```
