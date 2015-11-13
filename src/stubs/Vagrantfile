@@ -4,14 +4,22 @@ require 'yaml'
 VAGRANTFILE_API_VERSION = "2"
 confDir = $confDir ||= File.dirname(__FILE__)
 
+# Paths
 yamlFile = confDir + "/Gestao.yaml"
 jsonFile = confDir + "/Gestao.json"
 afterFile = confDir + "/after.sh"
 aliasesFile = confDir + "/aliases"
 
+# Plugns
+plugins = %w(vagrant-hostsupdater)
+
 require File.expand_path(File.dirname(__FILE__) + '/../../scripts/gestao.rb')
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    
+    plugins.each do |plugin|
+        system "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
+    end
 
     if File.exists? yamlFile then
         Gestao.configure(config, YAML::load(File.read(yamlFile)))
