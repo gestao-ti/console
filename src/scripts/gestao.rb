@@ -85,7 +85,7 @@ class Gestao
            config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: mount_opts
          end
         end
-
+    
         # Configure all sites
         if settings.include? 'sites'
 
@@ -94,7 +94,13 @@ class Gestao
                    s.args = ['-d']
             end
 
+            # Hosts
+            hosts = []
             settings["sites"].each do |site|
+                
+                # Add host
+                hosts.push(site["map"])
+                
                  type = site["type"] ||= "gestao"
                  if (type == "apache")
                    type = "apache2"
@@ -113,6 +119,8 @@ class Gestao
                    end
                 end
             end
+            # Add hosts autoupdate
+            config.hostsupdater.aliases = hosts
         end
     end
 end
