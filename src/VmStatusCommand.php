@@ -37,10 +37,6 @@ class VmStatusCommand extends Command
         $command = 'vagrant status';
         $path_machine = gestao_path_vms().DIRECTORY_SEPARATOR.$machine;
 
-//        $output->write(realpath(__DIR__.'/../'));
-//        echo "\n";
-//        die;
-
         $process = new Process($command, $path_machine, null, null, null);
         $process->run(function ($type, $line) use ($output, $machine, $path_machine) {
             $output->write($line);
