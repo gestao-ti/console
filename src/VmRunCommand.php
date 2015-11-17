@@ -1,6 +1,7 @@
-<?php namespace GestaoTI\Console;
+<?php
 
-use Symfony\Component\Process\Process;
+namespace GestaoTI\Console;
+
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,19 +21,20 @@ class VmRunCommand extends Command
              ->addArgument('machine', InputArgument::REQUIRED, 'Virtual machine.')
              ->addArgument('ssh-command', InputArgument::REQUIRED, 'The command to pass through to the virtual machine.');
     }
-    
+
     /**
      * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
      * @return void
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $machine = $input->getArgument('machine');
         $path_machine = gestao_path_vms().DIRECTORY_SEPARATOR.$machine;
-        
+
         $command = $input->getArgument('ssh-command');
         chdir($path_machine);
         passthru('vagrant ssh -c "'.$command.'"');

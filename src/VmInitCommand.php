@@ -3,7 +3,6 @@
 namespace GestaoTI\Console;
 
 use InvalidArgumentException;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,8 +33,9 @@ class VmInitCommand extends Command
     /**
      * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
      * @return void
      */
     public function execute(InputInterface $input, OutputInterface $output)
@@ -75,7 +75,6 @@ class VmInitCommand extends Command
         }
 
         $output->writeln('<comment>==> Gestao: Machine <info>'.$machine.'</info> initialized in:</comment> '.$path_machine);
-
     }
 
     /**
@@ -86,7 +85,7 @@ class VmInitCommand extends Command
     protected function configurePaths()
     {
         $yaml = str_replace(
-            '- map: ~/Projects', '- map: "'.str_replace('\\', '/',$this->basePathMachine).'"', $this->getGestaoFile()
+            '- map: ~/Projects', '- map: "'.str_replace('\\', '/', $this->basePathMachine).'"', $this->getGestaoFile()
         );
 
         $yaml = str_replace(
@@ -114,5 +113,4 @@ class VmInitCommand extends Command
     {
         return file_get_contents($this->basePathMachine.'/Gestao.yaml');
     }
-
 }
