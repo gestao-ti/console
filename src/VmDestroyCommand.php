@@ -2,11 +2,11 @@
 
 namespace GestaoTI\Console;
 
-use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process;
 
 class VmDestroyCommand extends Command
 {
@@ -26,8 +26,9 @@ class VmDestroyCommand extends Command
     /**
      * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
      * @return void
      */
     public function execute(InputInterface $input, OutputInterface $output)
@@ -40,7 +41,7 @@ class VmDestroyCommand extends Command
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
         });
-        
+
         passthru("rm -rf {$path_machine}");
         $output->writeln('<comment>==> Gestao: Machine '.$machine.' destroyed</comment>');
     }

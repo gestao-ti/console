@@ -2,16 +2,15 @@
 
 namespace GestaoTI\Console;
 
-use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process;
 
 class SelfUpdateCommand extends Command
 {
-        /**
+    /**
      * @var OutputInterface
      */
     private $output;
@@ -30,7 +29,7 @@ class SelfUpdateCommand extends Command
     {
         $this
             ->setName('self-update')
-            ->setAliases(array('selfupdate'))
+            ->setAliases(['selfupdate'])
             ->setDescription('Update the console to the latest version.')
             ->setHelp('The <info>%command.name%</info> command updates the console to the latest available version.')
             ->addOption('force', 'f', InputOption::VALUE_NONE, 'Force update.');
@@ -39,18 +38,19 @@ class SelfUpdateCommand extends Command
     /**
      * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
      * @return void
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $commands = [
             'composer global remove gestao-ti/console',
-            'composer global require gestao-ti/console'
+            'composer global require gestao-ti/console',
         ];
 
-        if(!$this->installerIsUpdated() || $input->getOption('force')){
+        if (!$this->installerIsUpdated() || $input->getOption('force')) {
             $process = new Process(implode(' && ', $commands), null, null, null, null);
             $process->run(function ($type, $line) use ($output) {
                 $output->write($line);
