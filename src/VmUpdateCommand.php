@@ -39,7 +39,8 @@ class VmUpdateCommand extends Command
         $process = new Process($command, $path_machine, null, null, null);
         $process->run(function ($type, $line) use ($output, $machine, $path_machine) {
             $output->write($line);
-            $output->writeln('<comment>==> Gestao: Machine '.$machine.' updated:</comment>');
         });
+
+        $output->writeln('<comment>==> Gestao: Machine '.$machine.' updated:</comment>');
     }
 }
