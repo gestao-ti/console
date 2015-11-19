@@ -101,14 +101,17 @@ class Gestao
                 # Add host
                 hosts.push(site["map"])
                 
-                 type = site["type"] ||= "gestao"
-                 if (type == "apache")
-                   type = "apache2"
-                 end
-
-                config.vm.provision "shell" do |s|
-                   s.path = scriptDir + "/serve-#{type}.sh"
-                   s.args = ['-c', site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443"]
+                if site.include? 'type'
+                    type = site["type"] ||= "apache"
+                    
+                    if (type == "apache")
+                       type = "apache2"
+                    end
+    
+                    config.vm.provision "shell" do |s|
+                       s.path = scriptDir + "/serve-#{type}.sh"
+                       s.args = ['-c', site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443"]
+                    end
                 end
 
                 # Configure The Cron Schedule
