@@ -36,12 +36,11 @@ case $opt in
 		# Create virtual host rules file
 		if ! sudo echo "
 			<VirtualHost *:$port>
+
 				ServerAdmin webmaster@localhost
 				ServerName $map
 				ServerAlias $map
 				DocumentRoot $to
-
-				php_value include_path '/var/www/library/'
 
 				<Directory $to>
 					Options Indexes FollowSymLinks MultiViews
@@ -53,6 +52,7 @@ case $opt in
 				ErrorLog /var/log/apache2/$map-error.log
 				LogLevel error
 				CustomLog /var/log/apache2/$map-access.log combined
+
 			</VirtualHost>" > $siteAvailableMap
 		then
 			echo -e $"There is an ERROR creating $map file"
