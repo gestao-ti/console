@@ -21,7 +21,7 @@ folders:
 sites:
     - map: gestao.app
       to: /home/vagrant/gestao
-      type: apache
+      #type: apache
 
 #variables:
 #    - key: 'APP_ENV'
