@@ -41,6 +41,6 @@ class VmUpdateCommand extends Command
             $output->write($line);
         });
 
-        $output->writeln('<comment>==> Gestao: Machine '.$machine.' updated:</comment>');
+        $output->writeln('==> Gestao: Machine '.$machine.' updated:');
     }
 }

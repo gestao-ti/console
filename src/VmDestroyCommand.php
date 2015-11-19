@@ -43,6 +43,6 @@ class VmDestroyCommand extends Command
         });
 
         passthru("rm -rf {$path_machine}");
-        $output->writeln('<comment>==> Gestao: Machine '.$machine.' destroyed</comment>');
+        $output->writeln('==> Gestao: Machine '.$machine.' destroyed');
     }
 }

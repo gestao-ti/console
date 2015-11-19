@@ -1,5 +1,6 @@
 class Gestao
     def Gestao.configure(config, settings)
+
         # Set the VM provider
         ENV['VAGRANT_DEFAULT_PROVIDER'] = settings["provider"] ||= "virtualbox"
 
@@ -8,6 +9,9 @@ class Gestao
 
         # Prevent TTY Errors
         config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
+        # Configure version
+        config.vm.box_version = settings["version"] ||= ">= 0"
 
         # Configure The Box
         config.vm.box = settings["name"] ||= "gestao-ti/master"
@@ -58,31 +62,43 @@ class Gestao
 
         # Configure The Public Key For SSH Access
         if settings.include? 'authorize'
-         config.vm.provision "shell" do |s|
-           s.inline = "echo $1 | grep -xq \"$1\" /home/vagrant/.ssh/authorized_keys || echo $1 | tee -a /home/vagrant/.ssh/authorized_keys"
-           s.args = [File.read(File.expand_path(settings["authorize"]))]
-         end
+          config.vm.provision "shell" do |s|
+            s.inline = "echo $1 | grep -xq \"$1\" /home/vagrant/.ssh/authorized_keys || echo $1 | tee -a /home/vagrant/.ssh/authorized_keys"
+            s.args = [File.read(File.expand_path(settings["authorize"]))]
+          end
         end
 
         # Copy The SSH Private Keys To The Box
         if settings.include? 'keys'
-         settings["keys"].each do |key|
-           config.vm.provision "shell" do |s|
-             s.privileged = false
-             s.inline = "echo \"$1\" > /home/vagrant/.ssh/$2 && chmod 600 /home/vagrant/.ssh/$2"
-             s.args = [File.read(File.expand_path(key)), key.split('/').last]
-           end
-         end
+          settings["keys"].each do |key|
+            config.vm.provision "shell" do |s|
+              s.privileged = false
+              s.inline = "echo \"$1\" > /home/vagrant/.ssh/$2 && chmod 600 /home/vagrant/.ssh/$2"
+              s.args = [File.read(File.expand_path(key)), key.split('/').last]
+            end
+          end
         end
 
         # Register All Of The Configured Shared Folders
         if settings.include? 'folders'
          settings["folders"].each do |folder|
-           mount_opts = []
-           if (folder["type"] == "nfs")
-               mount_opts = folder["mount_opts"] ? folder["mount_opts"] : ['actimeo=1']
-           end
-           config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: mount_opts
+            mount_opts = []
+
+            if (folder["type"] == "nfs")
+               mount_opts = folder["mount_options"] ? folder["mount_options"] : ['actimeo=1']
+            end
+
+            # For b/w compatibility keep separate 'mount_opts', but merge with options
+            options = (folder["options"] || {}).merge({ mount_options: mount_opts })
+
+            # Double-splat (**) operator only works with symbol keys, so convert
+            options.keys.each{|k| options[k.to_sym] = options.delete(k) }
+
+            config.vm.synced_folder folder["map"], folder["to"],
+                type: folder["type"] ||= nil,
+                owner: folder["owner"] ||= nil,
+                group: folder["group"] ||= nil,
+                **options
          end
         end
     

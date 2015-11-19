@@ -32,9 +32,9 @@ class InitCommand extends Command
             mkdir(gestao_path().'/scripts', 0777, true);
             copy(__DIR__.'/scripts/gestao.rb', gestao_path().'/scripts/gestao.rb');
             copy(__DIR__.'/scripts/serve-apache2.sh', gestao_path().'/scripts/serve-apache2.sh');
-            $output->writeln('<comment>==> Gestao: Creating scripts files...</comment> <info>✔</info>');
+            $output->writeln('==> Gestao: Creating scripts files...');
         } else {
-            $output->writeln('<comment>==> Gestao: Scripts files...</comment> <info>✔</info>');
+            $output->writeln('==> Gestao: Scripts files...');
         }
     }
 }

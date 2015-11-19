@@ -56,25 +56,25 @@ class VmInitCommand extends Command
         if (!file_exists($path_machine.'/Gestao.yaml')) {
             copy(__DIR__.'/stubs/Gestao.yaml', $path_machine.'/Gestao.yaml');
             $this->updateName($machine);
-            $output->writeln('<comment>==> Gestao: Creating Gestao.yaml file...</comment> <info>✔</info>');
+            $output->writeln('==> Gestao: Creating Gestao.yaml file...');
         }
 
         if (!file_exists($path_machine.'/after.sh')) {
             copy(__DIR__.'/stubs/after.sh', $path_machine.'/after.sh');
-            $output->writeln('<comment>==> Gestao: Creating after.sh file...</comment> <info>✔</info>');
+            $output->writeln('==> Gestao: Creating after.sh file...');
         }
 
         if (!file_exists($path_machine.'/aliases.sh')) {
             copy(__DIR__.'/stubs/aliases', $path_machine.'/aliases');
-            $output->writeln('<comment>==> Gestao: Creating aliases file...</comment> <info>✔</info>');
+            $output->writeln('==> Gestao: Creating aliases file...');
         }
 
         if (!file_exists($path_machine.'/Vagrantfile')) {
             copy(__DIR__.'/stubs/Vagrantfile', $path_machine.'/Vagrantfile');
-            $output->writeln('<comment>==> Gestao: Creating Vagrantfile file...</comment> <info>✔</info>');
+            $output->writeln('==> Gestao: Creating Vagrantfile file...');
         }
 
-        $output->writeln('<comment>==> Gestao: Machine <info>'.$machine.'</info> initialized in:</comment> '.$path_machine);
+        $output->writeln('==> Gestao: Virtual Machine <info>gestao-ti/'.$machine.'</info>');
     }
 
     /**

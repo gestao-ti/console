@@ -40,14 +40,16 @@ case $opt in
 				ServerName $map
 				ServerAlias $map
 				DocumentRoot $to
-				<Directory />
-					AllowOverride All
-				</Directory>
+
+				php_value include_path '/var/www/library/'
+
 				<Directory $to>
 					Options Indexes FollowSymLinks MultiViews
 					AllowOverride all
-					Require all granted
+					Order allow,deny
+					allow from all
 				</Directory>
+
 				ErrorLog /var/log/apache2/$map-error.log
 				LogLevel error
 				CustomLog /var/log/apache2/$map-access.log combined
