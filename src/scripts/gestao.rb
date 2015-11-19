@@ -75,10 +75,6 @@ class Gestao
          end
         end
 
-            owner: "vagrant",
-            group: "www-data",
-            mount_options: ["dmode=775,fmode=664"]
-
         # Register All Of The Configured Shared Folders
         if settings.include? 'folders'
          settings["folders"].each do |folder|
@@ -86,11 +82,7 @@ class Gestao
            if (folder["type"] == "nfs")
                mount_opts = folder["mount_opts"] ? folder["mount_opts"] : ['actimeo=1']
            end
-           config.vm.synced_folder folder["map"], folder["to"],
-                                   type: folder["type"] ||= nil,
-                                   owner: folder["owner"] ||= nil,
-                                   group: folder["group"] ||= nil,
-                                   mount_options: folder["options"] ||= [],
+           config.vm.synced_folder folder["map"], folder["to"], type: folder["type"] ||= nil, mount_options: mount_opts
          end
         end
     
