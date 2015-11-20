@@ -101,6 +101,24 @@ class Gestao
                 **options
          end
         end
+        
+        if settings.has_key?("variables")
+          settings["variables"].each do |var|
+            config.vm.provision "shell" do |s|
+              s.inline = "echo \"\nenv[$1] = '$2'\" >> /etc/php5/fpm/php-fpm.conf"
+              s.args = [var["key"], var["value"]]
+            end
+    
+            config.vm.provision "shell" do |s|
+                s.inline = "echo \"\n# Set Gestao Environment Variable\nexport $1=$2\" >> /home/vagrant/.profile"
+                s.args = [var["key"], var["value"]]
+            end
+          end
+    
+          config.vm.provision "shell" do |s|
+            s.inline = "service php5-fpm restart"
+          end
+        end
     
         # Configure all sites
         if settings.include? 'sites'
