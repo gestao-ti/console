@@ -56,11 +56,11 @@ class SelfUpdateCommand extends Command
                 $output->write($line);
             });
         }
-        
-        if($this->rmdir(gestao_path().'/scripts')){
+
+        if ($this->rmdir(gestao_path().'/scripts')) {
             (new InitCommand())->execute($input, $output);
         }
-        
+
         $this->output->writeln('<info>Gestao Console up to date.</info>');
     }
 
@@ -89,25 +89,27 @@ class SelfUpdateCommand extends Command
 
         return $isUpdated;
     }
-    
+
     /**
      * Remove path.
      *
-     * @param String   $dir
+     * @param string $dir
      *
      * @return bool
      */
-    public function rmdir($dir) 
+    public function rmdir($dir)
     {
-        if(is_dir($dir)) {
+        if (is_dir($dir)) {
             foreach (scandir($dir) as $item) {
-                if ($item == '.' || $item == '..') continue;
-                    unlink($dir.DIRECTORY_SEPARATOR.$item);
+                if ($item == '.' || $item == '..') {
+                    continue;
+                }
+                unlink($dir.DIRECTORY_SEPARATOR.$item);
             }
-        
+
             return rmdir($dir);
         }
-        
+
         return;
     }
 }
