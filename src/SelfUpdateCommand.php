@@ -85,19 +85,22 @@ class SelfUpdateCommand extends Command
 
         return $isUpdated;
     }
-    
+
     /**
      * Remove path.
      *
-     * @param String   $dir
+     * @param string $dir
      *
      * @return void
      */
-    public function rmdir($dir){
+    public function rmdir($dir)
+    {
         foreach (scandir($dir) as $item) {
-            if ($item == '.' || $item == '..') continue;
-                unlink($dir.DIRECTORY_SEPARATOR.$item);
+            if ($item == '.' || $item == '..') {
+                continue;
+            }
+            unlink($dir.DIRECTORY_SEPARATOR.$item);
         }
-        rmdir($dir); 
+        rmdir($dir);
     }
 }
