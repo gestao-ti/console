@@ -99,11 +99,15 @@ class SelfUpdateCommand extends Command
      */
     public function rmdir($dir) 
     {
-        foreach (scandir($dir) as $item) {
-            if ($item == '.' || $item == '..') continue;
-                unlink($dir.DIRECTORY_SEPARATOR.$item);
+        if(is_dir($dir)) {
+            foreach (scandir($dir) as $item) {
+                if ($item == '.' || $item == '..') continue;
+                    unlink($dir.DIRECTORY_SEPARATOR.$item);
+            }
+        
+            return rmdir($dir);
         }
         
-        return rmdir($dir);
+        return;
     }
 }
