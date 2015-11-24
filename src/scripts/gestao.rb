@@ -9,6 +9,9 @@ class Gestao
 
         # Prevent TTY Errors
         config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+        
+        # Allow SSH Agent Forward from The Box
++       config.ssh.forward_agent = true
 
         # Configure version
         config.vm.box_version = settings["version"] ||= ">= 0"
