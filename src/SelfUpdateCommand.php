@@ -57,9 +57,14 @@ class SelfUpdateCommand extends Command
             });
         }
         $this->output->writeln('<info>Gestao Console up to date.</info>');
-        rmdir(gestao_path().'/scripts');
+        $this->rmdir(gestao_path().'/scripts');
     }
 
+    /**
+     * Check version.
+     *
+     * @return bool
+     */
     public function installerIsUpdated()
     {
         $isUpdated = false;
@@ -79,5 +84,20 @@ class SelfUpdateCommand extends Command
         }
 
         return $isUpdated;
+    }
+    
+    /**
+     * Remove path.
+     *
+     * @param String   $dir
+     *
+     * @return void
+     */
+    public function rmdir($dir){
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..') continue;
+                unlink($dir.DIRECTORY_SEPARATOR.$item);
+        }
+        rmdir($dir); 
     }
 }
