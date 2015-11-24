@@ -56,7 +56,8 @@ class SelfUpdateCommand extends Command
                 $output->write($line);
             });
         }
-        $this->output->writeln('<info>Gestao Console is already up to date.</info>');
+        $this->output->writeln('<info>Gestao Console up to date.</info>');
+        rmdir(gestao_path().'/scripts');
     }
 
     public function installerIsUpdated()
