@@ -27,7 +27,7 @@ $ echo "export PATH='$PATH:~/.composer/vendor/bin'" >> ~/.bashrc && source ~/.ba
 ```
 
 #Settings
-```yalm
+```yaml
 ---
 ip: "192.168.0.100"
 memory: 512
