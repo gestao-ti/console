@@ -23,19 +23,63 @@ Second, make sure to place the ```~/.composer/vendor/bin``` directory in your PA
 
 ```bash
 # on your linux/MAC terminal:
-$ export PATH="$PATH:~/.composer/vendor/bin"
+$ echo "export PATH='$PATH:~/.composer/vendor/bin'" >> ~/.bashrc && source ~/.bashrc
+```
+
+#Settings
+```yalm
+---
+ip: "192.168.0.100"
+memory: 512
+cpus: 1
+name: gestao-ti/mapa
+provider: virtualbox
+
+authorize: ~/.ssh/id_rsa.pub
+
+keys:
+    - ~/.ssh/id_rsa
+
+folders:
+    - map: ~/
+      to: /home/vagrant/gestao
+      #owner: vagrant
+      #group: www-data
+      #mount_options:
+      #  - dmode: 775
+      #    fmode: 664
+
+sites:
+    - map: gestao.app
+      to: /home/vagrant/gestao
+      #type: apache
+
+#variables:
+#    - key: 'APP_ENV'
+#      value: 'local'
+
+# ports:
+#     - send: 93000
+#       to: 9300
+#     - send: 7777
+#       to: 777
+#       protocol: udp
+
 ```
 
 #Command
 
 Once installed, the simple ```gestao vm``` command will manage virtual machine in the directory ```~/.gestao```. For instance, ```gestao vm:up machine```  will run a virtual machine named machine. This method of manage is much faster to run virtual machine the gestao-ti.
 
-* ```gestao vm:init <machine> # Init virtual machine``` 
-* ```gestao vm:up <machine> # Start virtual machine```
-* ```gestao vm:halt <machine> # Turning off virutal machine```
-* ```gestao vm:destroy <machine> # Destroy the virtual machine```
-* ```gestao vm:status <machine> # Get the status of the virtual machine```
-* ```gestao vm:update <machine> # Update the virtual machine```
-* ```gestao vm:provision <machine> # Re-provisions the virtual machine```
-* ```gestao vm:run <machine> <command> # Run commands SSH```
-* ```gestao vm:edit <machine> # Edit settings of virtual machine```
+* ```vm:destroy    Destroy the virtual machine``` 
+* ```vm:edit       Edit settings of virtual machine``` 
+* ```vm:halt       Turning off virutal machine``` 
+* ```vm:init       Init virtual machine``` 
+* ```vm:provision  Re-provisions the virtual machine``` 
+* ```vm:reload     Reload the virtual machine``` 
+* ```vm:resume     Resume the suspended virtual machine``` 
+* ```vm:run        Run commands through the virtual machine via SSH``` 
+* ```vm:ssh        Login to the Homestead machine via SSH``` 
+* ```vm:status     Get the status of the virtual machine``` 
+* ```vm:up         Start virtual machine``` 
+* ```vm:update     Update the gestao machine image``` 
