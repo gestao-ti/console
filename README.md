@@ -43,16 +43,16 @@ keys:
 folders:
     - map: ~/
       to: /home/vagrant/gestao
-      #owner: vagrant
-      #group: www-data
-      #mount_options:
-      #  - dmode: 775
-      #    fmode: 664
+      owner: www-data
+      group: www-data
+      mount_options:
+        - dmode: 775
+          fmode: 664
 
 sites:
     - map: gestao.app
       to: /home/vagrant/gestao
-      #type: apache
+      type: apache
 
 #variables:
 #    - key: 'APP_ENV'
