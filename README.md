@@ -72,6 +72,7 @@ sites:
 Once installed, the simple ```gestao vm``` command will manage virtual machine in the directory ```~/.gestao```. For instance, ```gestao vm:up machine```  will run a virtual machine named machine. This method of manage is much faster to run virtual machine the gestao-ti.
 
 * ```vm:destroy    Destroy the virtual machine``` 
+* ```vm:build      Create new package to update version```
 * ```vm:edit       Edit settings of virtual machine``` 
 * ```vm:halt       Turning off virutal machine``` 
 * ```vm:init       Init virtual machine``` 
