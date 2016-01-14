@@ -34,6 +34,7 @@ memory: 512
 cpus: 1
 name: gestao-ti/mapa
 provider: virtualbox
+#version: "0.0.1"
 
 authorize: ~/.ssh/id_rsa.pub
 
